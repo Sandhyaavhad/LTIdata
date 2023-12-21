@@ -1,0 +1,23 @@
+Client Name: Standard Chartered Bank
+Interview Panel: Elangovan Gopinath and Choppara Sandeep
+
+Questions:
+	Introduction
+		Told to further explain more about ADO related activities.
+
+	Ask for end to end process of multistage CI/CD pipeline for various cases:
+		Deployment using Deployment Group
+		Deployment using K8S
+
+		Asked to explain all the Task in YML file for above 2 scenerio.
+
+	Questions about basic kubernetes command:
+		How to update image for a deployment
+		How to find which pod is running on which node.
+		How to find all the pods running on a specific node.
+
+	Asked about understnading of Java and other Programming language
+
+	Asked about any challenges that I faced in previous project and how I overcome that, how I design end to end solution for that.
+	
+	Explain a role; related to "DevOps (jira, Jenkins, GitHub etc) to Azure DevOps migration", and asked how my experaince can come handy in this situation.   

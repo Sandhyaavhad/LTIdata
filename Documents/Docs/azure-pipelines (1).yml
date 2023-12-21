@@ -1,0 +1,82 @@
+trigger:
+- main
+
+stages:
+- stage: 'Build_Stage' 
+  jobs:
+  - job: 'Build_Job' #Job name cannot have spaces
+    displayName: 'Application Build' #Name displayed when viewing in Azure DevOps
+    
+    pool:
+      vmImage: ubuntu-latest
+    
+    variables:
+      projectRoot: $(System.DefaultWorkingDirectory)
+      pythonVersion: '3.7'
+
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: $(pythonVersion)
+      displayName: 'Use Python $(pythonVersion)'
+
+    - script: |
+       python -m pip install --upgrade pip
+       pip install -r requirements.txt
+      displayName: 'Install dependencies'
+
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'SonarCloud'
+        organization: 'ltipracticelab'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'LTIPracticeLab_FirstPythonWebAppDemo'
+        cliProjectName: 'FirstPythonWebAppDemo'
+        cliSources: '.'
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.SourcesDirectory)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
+        replaceExistingArchive: true
+
+    - task: SonarCloudAnalyze@1
+
+    - task: SonarCloudPublish@1
+      inputs:
+        pollingTimeoutSec: '300'
+
+    - publish: $(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip
+      displayName: 'Upload package'
+      artifact: drop
+
+- stage: 'Deploy_Stage' 
+  jobs:
+  - job: 'Deploy_Job' 
+    displayName: 'Application Deploy'
+    pool:
+      vmImage: ubuntu-latest
+    variables:
+      pythonVersion: '3.7'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '$(pythonVersion)'
+      displayName: 'Use Python version'
+    
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'drop'
+        targetPath: '$(Pipeline.Workspace)'
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'Test'
+        appType: 'webAppLinux'
+        WebAppName: 'pythondemolti'
+        packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
+
+

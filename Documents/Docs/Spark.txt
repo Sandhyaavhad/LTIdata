@@ -1,0 +1,35 @@
+APACHE SPARK
+Apache Spark is a high-performance distributed computing framework 
+how to work with Spark in a Hadoop cluster, with HDFS serving as the
+data storage and YARN as the computing framework. Often, organizations use
+several data sources to ingest data that become the source of most of their
+analytical work. By running Spark on Hadoop, you can use the same Hadoop
+cluster and the same data for running both MapReduce and Spark jobs.
+
+
+it is an open source, wide range data processing engine.
+Spark can perform batch processing and stream processing. Batch processing refers, to the processing of the previously collected job in a single batch. Whereas stream processing means to deal with Spark streaming data.
+Spark is independent of Hadoop since it has its own cluster management system. Basically, it uses Hadoop for storage purpose only.
+there is one spark’s key feature that it has in-memory cluster computation capability. Also increases the processing speed of an application.
+Spark is written in Scala 
+As we know, there was no general purpose computing engine in the industry, since
+
+To perform batch processing, we were using Hadoop MapReduce.
+Also, to perform stream processing, we were using Apache Storm / S4.
+Moreover, for interactive processing, we were using Apache Impala / Apache Tez.
+To perform graph processing, we were using Neo4j / Apache Giraph.
+Hence there was no powerful engine in the industry, that can process the data both in real-time and batch mode. Also, there was a requirement that one engine can respond in sub-second and perform in-memory processing.
+Therefore, Apache Spark programming enters, it is a powerful open source engine. 
+Since, it offers real-time stream processing, interactive processing, graph processing, in-memory processing as well as batch processing. Even with very fast speed, ease of use and standard interface. 
+Basically, these features create the difference between Hadoop and Spark. 
+
+
+a. Spark Core
+Spark Core is a central point of Spark. Basically, it provides an execution platform for all the Spark applications. Moreover, to support a wide array of applications, Spark Provides a  generalized platform.
+
+b. Spark SQL
+On the top of Spark, Spark SQL enables users to run SQL/HQL queries. We can process structured as well as semi-structured data, by using Spark SQL. Moreover, it offers to run unmodified queries up to 100 times faster on existing deployments.
+
+c. Spark Streaming
+Basically, across live streaming, Spark Streaming enables a powerful interactive and data analytics application. Moreover, the live streams are converted into micro-batches those are executed on top of spark core
+

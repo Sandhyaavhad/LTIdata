@@ -1,0 +1,37 @@
+Planning of AKS Cluster
+	1. Understand Requirement of application/min and max pods.
+	2. Calculate Computational power (RAM and Processor needed to support application). General application- 4 GB RAM, 1 Core CPU per pod. Microapplication- 512 mb RAM. We will add 15-20% of Buffer.
+	3. Based on Computational power, we will decide the Node Configuration we need in AKS and numbers of Node.
+
+
+Create= Plan + Create
+Create: Azure Powershell (using azure Commands), Using Azure Portal
+	Production: Ensure High Availibility: Availibility Zones
+	Developement: Omit Availibility Zones. Help us to save money.
+	
+	Parameters: Node pool, Resource Group, Location, Availibility Zomes, Storage type etc
+	
+
+Disaster Recovery: 	
+	Azure provide and SLA of 99.9% with availibilty zones enabled.
+	2 level Diasaster Recovery:	1. AKS recovery: High Availibility, "etcd" periodic backup of etcd.
+								2. Application on AKS backup and Recovery: Third party tool "Velero", Install Velero on k8s cluster: https://sysadminas.eu/Part-3-AKS/
+								
+
+Backup Strategy
+	Incremental Backup: Periodically incremental backup; After a time period: we take full backup.
+	
+	
+Securing AKS
+	With Every AKS; we get Load balancer
+		1. Load Balancing Rule
+		2. Inbound NAT Rule
+		3. Outbound Rule
+		
+		Using these three rules, we can decide the inflow and outflow of traffic and hence secure our application. Also, we can use Firewall for our AKS application to restrict its access.
+		
+		To provide access to different users: We can use Azure RBAC
+		
+		
+
+		

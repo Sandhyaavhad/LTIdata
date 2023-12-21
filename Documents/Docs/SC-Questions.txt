@@ -1,0 +1,113 @@
+-->Introduction and asked to explain previous projects associate has worked on ?
+
+-->Questions from Gitlab ?
+	Questions about GitLab runner agents, how to configure them ?
+	How to create GitLab CI/CD pipelines.
+
+-->Question from Bitbucket
+
+
+-->Questions from ADO
+	My role in CI/CD pipeline.
+	How to configure reusabele CI/CD for multiple projects if some of project doesn't support sonarqube ? (Related to Task Group)
+		Sonarqube support around 30+ main languages, so it is highly unlikly that any project doesn't support sonarscanning.
+		But we can't ignore the chances. We can either use Task Group where we can have seperate Task group for build and other purpose and Sonarqube jobs, and we can add Sonarqube task group for projects where we need Sonar scanning. Or if project doesn't support sonarqube, we can also explore SonarQube alternatives for SCA such as Veracode or even GitLab provide the facility of Security analysis.
+
+	How to restrict users from directly pushing code to main branch.
+		We can configure branch policy on the specific branch (in this case master), "Require a minimum number of reviewers" To ensure that teams review and approve PRs before changes getting merged to main. By this way, Developers will not be able to push any commits directly. instead, they will need to create a new branch, and create a PR and once the PR is approved, changes will be merged.
+
+	How can you deploy to multiple server.
+		We can deploy any application to multiple hosts (be it VM or on premise server) using Deployment groups. To achieve this, we need to add those servers to deployment group by installing agents over there.
+		Post this, we can Add deployment group job in Relase Pipeline. And set the Targets to deploy to in parallel.
+		We can use Ansible to check, manage and update dependencies for these multiple servers.
+
+-->Question from Docker
+	How to deploy docker images.
+	Difference between entrypoint and cmd, when to use which ?
+	To override the ENTRYPOINT directive, we need to add the –entrypoint flag and the desired command before the image name and any arguments after the image name. For example:
+	docker run --entrypoint echo ubuntu "Hello World"
+
+	How you can deploy the container, such that container gets removed as user session will get terminated ?
+		Rootless containers exit once the user session exits, it is a problem; Solution: docker run -d -p 8080:8080 --restart always image
+		If you use -d with --rm, the container is removed when it exits or when the daemon exits,
+		
+	How to login to ACR and keep the session.
+		We can use the docker login command to login to ACR: docker login myregistry.azurecr.io -u username -p passowrd
+		By default, Docker stores the login password unencrypted within the /root/.docker/config.json file. The persistancy of a login session is 60 minutes.	
+		
+		Also, We can use --password-stdin to provide password from input, we should use this option when we want to prevents the password from ending up in the shell’s history, or log-files. The best way to use this one is store and read passowrd from text file: 
+		cat ~/my_password.txt | docker login --username User --password-stdin
+
+
+	Ques: How to push docker image to ACR ?
+		Login to ACR
+			docker login myregistry.azurecr.io -u username -p password	
+		Push the image
+			docker push myregistry.azurecr.io/samples/nginx
+
+		We can also achieve the same by using docker build and push job in ADO Pipline, for that we need to create a service connection to ACR.
+
+	Ques: Tow to pull image from ACR ?
+		Login to ACR: docker login myregistry.azurecr.io -u username -p password
+		To pull the image: docker pull myregistry.azurecr.io/samples/nginx
+		
+		
+-->Questions from K8S
+	Told to explain kubernetes architecture and there components.
+	How to change image/ in a running container.
+		
+
+	How to create image of a running container.
+		docker commit container_id imagename
+
+
+-->Basic Questions from Java Developement.
+
+-->I asked about where does my role fits in this project ?
+	I will be woring with clients, primarily focussed on Jenkins, BitBucket and Java/Python developement. Also the migration happening towards ADO, so going forward to manage ADO pipelines and configure them.
+
+
+
+		Jenkins Pipeline SCB Questions
+-----------------------------
+
+What are the stage added into the your Jenkins file.
+
+
+How to know which user trigger your Jenkins job.
+
+How to parametrize build Jenkins’s job.
+
+what is Jenkins Credentials.
+
+How to do git configuration with Jenkins.
+
+How to call groovy file in your Jenkins file.
+
+Jenkins Master and slave configuration.
+
+How to restrict the build option for user in Jenkins.
+
+How to do k8s configration with jenkins.
+
+------------------
+
+
+
+
+docker run -it image: Will run the image in interactive mode (Logs on screen) and will also allocate a tty (terminal) for the container. 
+
+To run a container indefinetly 
+	docker run -d -t ubuntu
+	docker run ubuntu sleep infinity
+	
+To enter shell of a running container:
+	docker exec -it Container_ID \bin\bash
+
+To run docker command rootless:
+	Install the rootless dependencies
+	Use rootless method: docker context use rootless
+	Run docker command
+
+
+Certificates in docker image.

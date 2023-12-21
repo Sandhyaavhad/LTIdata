@@ -1,0 +1,100 @@
+								Moving Data into and out of HADOOP (Beetween hadoop cluster using Sqoop)
+
+Sqoop can be used to move data between HDFS and a relational database.
+Apart from different tools Hadoop itself contains DistCp to let you transfer data between clusters. 
+
+
+Different ways to dump different kind of data.
+1- Bulk data : DistCp is a bulk data loading tool that comes with Hadoop, and it offers effective data transfer capabilities to move data between Hadoop clusters.
+2- Data from Relational database : Apache Sqoop lets you easily import and export data from and to various popular relational databases.
+Streaming Data: Apache Flume is a commonly employed event transport system that uses the push mode to write streaming data such as web server logs to your HDFS system. Apache Kafka is an alternative streaming data movement candidate and uses a publish-subscribe messaging mechanism. Apache Storm is another great tool for event stream processing, which involves responding to individual events within a reasonable timeframe.
+
+
+**If your goal is to load data from flat files or semi-structured/unstructured files, you can simply use HDFS shell commands or Hadoop’s DistCp utility
+
+		Handling Data into HDFS from the Command Line
+1- Using -cat command: The -cat command copies source paths to stdout. The command concatenates the source files and displays the contents. This command is handy when you want to view the contents of a script or an output file and works similarly to Linux’s cat command.
+	ex: hadoop fs -cat hdfs://nn1.example.com/file1 
+2- You can test whether a file exists in HDFS by using following command: hdfs df –test –e PATH_OF_FILE
+	Option 		Uses
+	-z			Whether a file is empty ?
+	-d			Whether it is a directory ?
+3- You can use –stat command to find various file-related statistics, such as whether it’s a file or a directory.
+	hdfs dfs –stat PATH_OF_FILE
+4- You can create an empty file with the -touchz command:
+	hdfs dfs –touchz PATH_OF_FILE
+	
+		Copying and Moving Files from and to HDFS
+
+You can use either the HDFS –put or the –copyFromLocal command to move a file or even a directory from the local file system into HDFS and vice versa.
+	dfs fs -put <localsrc> ... <HDFS_dest_Path>
+	eg: hadoop dfs -put /var/hadoop/logs /users/sam/
+* If a file with same name already exist, you can use -f command to overwrite files.
+	hadoop dfs -put –f /var/hadoop/logs /users/sam
+* You can also copy multiple files using put commands as well as you can use wild card same as linux system.
+	hdfs dfs –put /tmp/file* /users/sam/
+* You can extract a zip file and load it into HDFS with the -put command in a single step, as shown in the following example:
+	gunzip –c testfile.gz | hdfs dfs –put - /user/sam/testfile
+	
+copyFromLocal: The -copyFromLocal command works the same as the -put command, the only difference being that it’s restricted to copying from a local file system to HDFS, whereas the -put command can copy files from HDFS to the local file system as well.
+ Syntax: hdfs dfs -copyFromLocal <local_FS_filename> <target_on_HDFS>
+ 
+If you want to move a large file into HDFS but you really don’t want to consume three times the size of the file in HDFS storage (assuming you’re using the default replication factor of three), you can overwrite the default replication factor when copying a file by specifying the replication factor with the –D option, as shown here.
+	e.g: hdfs dfs –D dfs.replication=1 –copyFromLocal bigfile.txt /user/alapati
+
+copyToLocal: The -copyToLocal command is analogous to the -copyFromLocal command. It copies a file from HDFS to the local file system.
+
+Using the -get Command to Move Files: You can use the -get command to copy HDFS files to the local file system.
+	hdfs dfs –get <hdfs src> <Local dest path>
+
+Moving Files inside HDFS: The HDFS -mv command lets you move a file from one HDFS directory to another.
+	e.g: hdfs dfs –mv /users/sam/scripts/test1.txt /users/sam/tmp/test1.txt
+
+* You can use the -getmerge command to concatenate multiple HDFS files into a single file in the local system.
+	e.g: hdfs dfs –getmerge <src> <localdst>
+
+*** Hadoop’s DistCp command is a much faster way to move large amounts of data within a cluster or between two clusters
+
+							Using the -tail and head Commands
+You can use the –tail command to view a (HDFS) file’s last portion as same as in linux: hdfs dfs –tail -f path-of-text-file
+	eg: hdfs dfs –tail -f /users/sam/text1.txt
+	
+There is no specific head command in hdfs but you can view the topmost portion of an HDFS file by piping the contents of the file and then using the Linux head command to view the file’s contents.
+	eg: hdfs dfs –cat path-of-text-file | head
+	
+							Copying HDFS Data between Clusters with DistCp
+DistCp help you to move data between two Hadoop clusters OR from one location in HDFS to another location within the same
+Hadoop cluster. i.e Using DistCp you can:
+	1- Move data beetween different hadoop cluster.
+	2- Move data beetween different nodes of same hadoop cluster.
+DistCp uses MapReduce underneath to perform parallel loading of data.
+DistCp works great for moving large amounts of data in both bulk and batch modes. Bulk mode is when you want to load a cluster with a lot of initial data from a source, and batch mode is when you want to perform regular exports and imports of data to and from HDFS.
+	Syntax: distcp srcdir destdir
+* srcdir is a fully qualified path to the source directory. When moving data between clusters, the path will include the Active NameNode host and port information for the source cluster. 
+* destdir is a fully qualified path to the destination directory. When moving data between clusters, the path will include the Active NameNode host and port information for the destination cluster.
+	e.g: hadoop distcp hdfs://nn1:8020/user/hadoop/dir1 hdfs://nn2:8020/user/hadoop/dir2
+Here nn1 is namenode of cluster1 whereas nn2 is namenode of cluster2.
+***** Using distcp you can specify multiple sources path in a text file and pass that text file as a source.
+	e.g: hadoop distcp -f hdfs://nn1:8020/srclist hdfs://nn2:8020/destination
+	here srclist is a text file containing multiple sources in this way:
+		hdfs://nn1:8020/source/a
+		hdfs://nn2:8020/source/b
+		
+distcp options and usage:
+-p: Modification times are preserved when you specify this option.
+-i: This option tells DistCp to ignore any failures. It also saves the logs from a failed copy.
+-log: This option lets you specify a directory for a log file.
+-m: This option specifies the maximum number of mappers for a copy.
+-overwrite: This option overwrites the destination.
+-update: This option overwrites the destination if the source file size is different from the target file size.
+-f <urilist uri>: This option lets you specify a fully qualified URI to list all the source files instead of specifying them on the command line.
+-delete: This option deletes files from the destination (but not from the source). Trash will be used if you’ve enabled it.
+-sizelimit <n>: This option specifies the maximum size of the copy in bytes.
+-filelimit: This option lets you limit the total number of files.
+
+You must specify the –update option in the following cases:
+	When you’re copying files that don’t already exist on the target cluster
+	When the files exist but the file contents are different
+The –overwrite option will overwrite target files if they exist.
+If you add either –update or –overwrite, only the contents of the source directories are copied over. The source directories themselves aren’t copied to the target cluster.
+By using update tag with distcp, if there’s a file with the same name under the two different source directories on the source cluster, DistCp will abort the copy process.

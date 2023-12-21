@@ -1,0 +1,38 @@
+kubectl create clusterrolebinding devsa --clusterrole=cluster-admin --serviceaccount=dev:devsa
+
+
+kubectl config set-context --current --namespace=qa
+
+----------------
+
+Create namespace
+
+Switch to Specific namespace
+
+Create Service account
+
+Create Role/ Apply rolebinding
+kubectl create clusterrolebinding qa-sa --clusterrole=cluster-admin --serviceaccount=qa:qa-sa
+
+
+
+Create Secret
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: qasa-secret-1
+  annotations:
+    kubernetes.io/service-account.name: qa-sa
+type: kubernetes.io/service-account-token
+EOF
+
+kubectl get secret devsa-secret -n dev -o json
+
+
+
+
+
+
+
+az aks update -n dev -g LTIFreeY --attach-acr acrdemofirst

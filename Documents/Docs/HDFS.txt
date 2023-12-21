@@ -1,0 +1,48 @@
+five V's:  Velocity, Volume, Value, Variety, and Veracity.
+In hdfs large files are first divided in block, these blocks are stored in nodes then these nodes are replicated on other nodes.
+Datanode performs read and write operation as per the request of the clients. 
+At startup, each Datanode connects to its corresponding Namenode and does handshaking. Verification of namespace ID and software version of DataNode take place by handshaking. At the time of mismatch found, DataNode goes down automatically.
+MapReduce is a software framework for easily writing applications that process the vast amount of structured and unstructured data stored in the Hadoop Distributed File system.
+MapReduce programs are parallel in nature
+In order to complete a particular task in a fast and efficient manner, a distributed application can run on multiple systems in a network at a given time (simultaneously)
+
+HDFS is a Filesystem of Hadoop designed for storing very large files running on a cluster of commodity hardware
+There’s no guarantee that HDFS will automatically distribute data evenly among the DataNodes in a cluster.
+HDFS keeps one of the replicas of a data block on the node that’s writing the block
+HDFS balancer is a tool provided by Hadoop to balance the data spread across the DataNodes in a cluster by moving data blocks from the over-utilized to the under-utilized DataNodes.
+You can run the balancer manually from the command line by invoking the balancer command. The start-balancer.sh command invokes the balancer.
+ You can also run it by issuing the command hdfs –balancer
+ hdfs balancer –threshold 5
+ nohup su hdfs –c "hdfs balancer –threshold 2" > /tmp/balancer.log/stdout.log 2>/tmp/balancer.log/stderr.log &
+ 
+ 
+ Making the Balancer Run Faster
+ The default value for the bandwidth is 10MB per second and you can raise it to make the balancer complete its work faster. You can raise the bandwidth up to about 10 percent of your network speed without any noticeable impact on the cluster’s workload.
+  hdfs dfsadmin -setBalancerBandwidth <bandwidth in bytes per second>
+  
+  Make sure that you have adequate bandwidth before increasing the bandwidth. You can find out the speed of your NIC card by issuing the following command:
+  ethtool eth0
+  Only one balancer job can run at a time. When the second (off-peak) job starts, it stops the first balancer job and starts a new balancer job with the higher bandwidth setting.
+  
+  \
+  dfsadmin –refreshNodes: The dfsadmin –refreshNodes command updates the NameNode with the list of DataNodes that are allowed to connect to the NameNode
+  
+  The NameNode reads the hostnames of the DataNode from the files pointed to by the dfs.hosts and the dfs.hosts.exclude configuration parameters in the hdfs-site.xml file. The dfs.hosts file lists all the hosts that are allowed to register with the NameNode. 
+  
+  dfsadmin –metasave Command
+The dfsadmin –metasave command provides more information than that provided by the dfsadmin –report command. This command gets you various block-related pieces of information such as:
+
+Total number of blocks
+
+Blocks waiting for replication
+
+Blocks that are currently being replicated
+
+The Resource Manager takes care of the cluster’s CPU and memory resources at all times for all the Jobs while the Application Master manages the actual jobs.
+
+Cluster Monitoring tools: Open Source Hadoop/Apache Hadoop à Nagios/ Ganglia/Ambari/ Shell scripting/Python Scripting
+Nagios and Ganglia are open source
+
+
+Hadoop 3 provides facility of more than one standby namenodes.
+Hadoop 3.0 introduces one more method called erasure coding. Erasure coding provides the same level of fault tolerance but with lower storage overhead.

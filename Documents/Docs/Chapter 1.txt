@@ -1,0 +1,85 @@
+																		HADOOP ADMIN NOTES
+
+Hadoop use parallel processing algorithms and simple data processing models that underlie a highly efficient and reliable computing architecture
+
+Hadoop can be run both on premises and cloud, such as the Amazon Web Service’s (AWS) Hadoop-based big data offering named Amazon EMR (Elastic MapReduce).
+
+Unique Features of Hadoop
+1-Capability to handle large data sets:
+2-Fault tolerance: Everything in Hadoop is based on the assumption that hardware fails.Hadoop depends on large numbers of servers so it can parallelize work across them. Server and storage failures are to be expected, and the system isn’t affected by non-functioning storage units or even failed server
+3-Streaming access to data: Traditional databases are geared mostly for fast access to data and not for batch processing. Hadoop was originally designed for batch processing such as the indexing of millions of web pages and provides streaming access to data sets
+
+Hadoop’s capability to process data so efficiently is the feature known as data locality, meaning Hadoop brings processing to where the data is stored, rather than doing things the old fashioned way, which involves moving data through the network. That tends to be far slower, due to the network/bandwidth bottleneck. 
+
+Hadoop stores its data in a distributed file system called HDFS, and it moves computation such as MapReduce processing to the cluster’s nodes using YARN, which is Hadoop’s resource management system.
+
+Traditional systems use a scale up architecture while Hadoop’s HDFS file system lets you adopt a scale out architecture
+
+Hive helps users impose a relational database–like (SQL) abstraction over HDFS data,
+
+One of the biggest issues with traditional databases and data warehouses is scalability. Once your data reaches a few terabytes, queries take an extremely long
+time to finish. Scalability (and reliability) is Hadoop’s calling card—the size of your data set is really irrelevant if you’ve the processing capacity. If you triple the number of nodes in a cluster, you can get the job done in a third of the time.
+
+Data lake is alluding to a central location to store all of an organization’s data, irrespective of the source of the data as well as the analytical frameworks that utilize this data. The data lake serves as a data ingestion and analytical grid for the organization.
+
+You can use the data lake as a landing place for all data arriving into a company’s systems as well as to store data you wish to offload from data warehouses and other data stores. The key idea is that you maintain one big central repository for all your data—structured, semi-structured and unstructured
+
+A Hadoop2 cluster can support over 10,000 servers.
+Edge servers (so called because they really don’t run any Hadoop processes but can access the cluster), which are used for accessing the Hadoop cluster to launch applications
+
+Technically speaking, Hadoop consists of just HDFS and YARN, it’s very common to use a number of other frameworks and software such as Hive, Pig, Oozie, Spark and Flume in production Hadoop clusters
+
+How to schedule jobs in hadoop ??
+
+Components that are most important for administrators, such as Apache Oozie: which you must master in order to efficiently schedule Hadoop-related jobs.
+Similarly, learning how to use Apache Sqoop lets you move data into and out of your cluster.
+
+A task that fails due to the storage issues will automatically be restarted by Hadoop on a different node
+
+Tools such as Nagios and Ganglia help you manage and monitor the entire cluster, including the operating system, storage and network.
+
+Hadoop 1 is merely a combination of HDFS and Java-based MapReduce programs.In Hadoop 2, there’s a single global ResourceManager process that manages resources across the cluster, and it runs on a master node. The worker nodes will all have individual NodeManagers that perform data processing tasks.
+
+The JobTracker in Hadoop 1 performed both scheduling and task management functions. In Hadoop 2, the JobTracker functions have been broken into two—scheduling and resource management—with the ResourceManager handling the scheduling portion and the application-specific ApplicationMaster taking care of resource management
+
+Hadoop 2 has strong high-availability features and lets you run both a Standby NameNode as well as a Standby ResourceManager
+
+In Hadoop 1, you could use just MapReduce as the processing engine, regardless of whether you used Java-based MapReduce programs, Pig, Hive or a streaming
+model using Python, Ruby and so on. There simply was no alternative execution engine available. Hadoop 2 offers a wide variety of processing engines, such as MapReduce, Apache Spark, Apache Tez and others.
+
+Hadoop 2 supports a wide variety of applications, as summarized here:
+	Batch processing— MapReduce and Hive/Pig, Apache Tez
+	Interactive SQL— Apache Tez
+	Online database— HBase
+	Streaming— Apache Storm, Apache Spark and Apache Samza
+	In-memory (iterative applications)— Apache Spark
+	Graph processing— Giraph and Spark GraphX
+	HPC MPI— OpenMPI
+	Scalable search— Apache Solr
+	HBase on YARN— HOYA
+
+Hadoop 2 lets you choose an appropriate processing engine for specific types of use cases.
+
+In hadoop1,It used a first in, first out (FIFO) model of resource allocation by default, which meant that long running jobs, by hogging the cluster’s resources, could potentially keep small but critical jobs from starting, even when the long-running jobs were non-critical in nature. Hadoop in later versions has introduced much more sophisticated jobschedulers, named the Fair Scheduler and the Capacity Scheduler.
+
+Hadoop 1 cluster could scale “only” up to around 5,000 nodes, a Hadoop 2 cluster can scale up to around 10,000 nodes.
+
+MapReduce
+MapReduce is a distributed processing framework that lets you write Java programs to process data you store in HDFS.until the release of Hadoop 2, it was the only framework for processing data in a Hadoop system.
+
+Apache Hive
+Apache Hive provides a SQL interface that enables you to use HDFS data without having to write programs using MapReduce.
+It’s important to understand that unlike Apache HBase, Hive is not a database—it simply provides a mechanism to project a database structure on data you store in HDFS and lets you query that data using HiveQL, a SQL-like language. Hive uses a type of SQL that lets you query HDFS data in ways that are similar to how you query data stored in a relational database.
+
+When you use a Hive query, Hive parses the SQL query and generates a MapReduce job to process the data to get you the query results.
+HIVE isn't a database .
+
+When you write a query using HiveQL, internally, the Hive engine will transform the query into a MapReduce job. Hive offers several built-in functions
+to facilitate working with data warehouses, and users can also add their own userdefined functions (UDFs) in Java, to enhance Hive’s functions. Hive’s data types, tables and partitions are quite similar to what you deal with in the context of traditional relational databases.
+
+Hive is most definitely not practical for online transaction processing and realtime queries and updates because of high latency.
+
+Pig is a high-level framework for data processing that enables you to use a scripting language called Pig Latin to process data using MapReduce on a Hadoop
+cluster.
+
+Page 71

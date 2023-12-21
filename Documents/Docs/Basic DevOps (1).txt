@@ -1,0 +1,142 @@
+
+Explain earlier stages and problems---> DevOps is not a tool or technology, definetly it contains a lot of tool but DevOps is a methodology; about brining Developement and Operation team together to work in a collaboratively manner, about automating the manual processes throughout the SDLC.
+Benefits: Faster deployment of "stable" product. Gives us a upper hand on our competator.
+
+DevOps Tools:
+	Version Control System: Git
+	Contineour Integration: Jenkins, GitHub Actions
+	Contineous Testing: Selenium
+	Conteneous Deployment: Jenkins
+	Code Quality Check: SonarQube, FOSSA
+	Cloud Native solution: Azure DevOps
+
+SSH- Secure Shell; Let user to control a system remotly using command line.
+
+Configuration management (CM) is basically a practice of systematic handling of the changes in such a way that system does not lose its integrity over a period of time. Allow to make changes on larger numbers of system.
+
+CI: Developed integrating their code to shared repository and upon every commit, an automated build to be triggered to build the code, check code quality and run unit tests to detect problems or loopholes in code during developement phase only. ---> Improves Software quality and fix error at initial stage only.
+		Build+Test+CodeScans
+
+CT: Process of running automated test cases
+
+Difference between Contineous Testing and Automation Testing
+	Contineous testing is about execution preefined test cases while in automation testing, we can build our test cases as well and check our code againsth those test case. Also, Contineous testing more focussed on businness risk while automation testing focus of bug free code. Auto testing is generally done on testing environment.
+
+SDLC/DevOps phases
+	Planning --> Developement (Repo) ---> CI (pipelines) ---> Deployment ---> Monitoring
+
+
+Both are practices and methodology, DevOps removes gap between Developer and Operation Team, whereas Agile removes gap between Developer and Client understanding.
+
+
+Contnious Deployment:
+
+Difference between contineous Deployment and Contineous Delivery: Contineous Delivery requires some amount of manual intervention (in form of approvals) in process of deployment while Contineous Deployment doesn't required any manual intervention.
+
+
+Contineous Build: Code Commit ----> Build+Test+CodeScans+Artifact creation
+
+Contineous Deployment: Code Commit ----> Deploy; without manual intervention
+
+Contineous Delivery: Code Commit ----> Deploy; Manual intervention required.
+
+
+Version control is a system that records changes to a file/set of files over time so that specific versions can be recalled later. It comprises a central shared repository where team members can change a file/ set of files. It allows you to track history of a file/project or to return to earlier stage of a file or project.
+
+Centralized and De-centralized VCS:
+	Centralized: All code at one place and central server, developers will have copy of their files but no developer have copy of all files/code in local. Also developers need internet to access main repository.
+	De-centralized: Every developer have his local copy of entire code.
+		Better: De-centralized
+
+Various branching strategy:
+	Feature Branching: Create a new branch for every feature and then merge to master upon completion.
+	Task Branching: A different branch for each Task and then merge the branch into master after completion.
+	Release Branching: A different branch for every planned release (Set of features).
+Which is best ?? -- > Depend on use case and requirements.
+
+
+MTTR: Mean time to Release
+MTTD: Mean time to detection
+
+
+Shift Left : SDLC= Left Part (Planning and building) + Right Part (Testing user acceptance etc)
+		So trying to shift as many task from right cycle to left cycle to reduce failure at later stages. Helps in reducing deployment failure.
+		How to achieve; work as closely/collaboratively with developement team.
+
+
+Different Deployment Pattern:
+	Blue Green; Blue: Old Version (Live), Green: New Version. Traffic movement from Blue to green. Only one live at a time. Post traffic migration, the blue environment is kept on hold just in case of rollback necessity. Requirement: Two identical environments.
+	Canary: IT team makes the new release available to some users before others. Unlike Rolling update, the canary technique targets certain users to receive access to the new application version, rather than certain servers. Better when we need early feedback and bug identification.
+	Rolling update: some servers run the new version of the application, while others continue to host the older one, traffic got distributed between new and old version. If error occured in new version; team will still have older versions running, so Operation team can readirect all traffic to older version of application.
+	
+	Rolling deployment method benefits applications that experience incremental changes on a recurring basis.
+	Blue/green, which requires a large infrastructure budget, best suits applications that receive major updates with each new release.
+	Canary deployment can work well for fast-evolving applications and fits situations where rolling deployment is not an option due to infrastructure limitations.
+
+
+Sanity testing is performed to ensure that the code changes that are made are working as properly
+
+How to configure git repo to do santy check before any commit.
+	Git provide a pre-commit hook, we can use that hook to create a script to do so !!
+
+How to ensure that a script is run every time a commit is made:
+	We can run the script as workflow or we can use Update hook.
+
+
+Implementing DevOps in a project:
+	1. Understanding existing process, identify scope of improvement, create a roadmap.
+	2. Propose POC.
+	3. Upon successfull POC, implement devops.
+
+
+
+Continuous monitoring in DevOps is a process of detecting, identifying, and reporting any faults or threats in the entire infrastructure of the system. Ensuring all application, services and infrastructure are healthy and working properly.
+
+Is DevOps Agile ?? No; DevOps= Agile+ Automation
+
+
+
+How to push code in git:
+	Set up connection: Git remote add origin Repo_URL
+	Push the code: git push origin branchName
+
+Reverting changes in Git: git revert CommitID
+
+Basic git command: git commit, git init, git clone, git push, git pull etc
+
+
+
+
+--------------------------- Containerization--------------------------
+
+Archietecture of Docker:
+	Docker follow Client-Server architecture. 
+	
+Benefits of Docker:
+
+	
+
+
+
+Ansible: IaC
+
+What is SSL certificate.
+
+What is merger conflict?
+
+
+Rollback Strategy ?
+
+Benefits of Version Control System ?
+	
+
+What is smoke test
+
+
+What is devops Pipeline ?
+
+
+Basic use of ansible ?
+
+IaC ??
+

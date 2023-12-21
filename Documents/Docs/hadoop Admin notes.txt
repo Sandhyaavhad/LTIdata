@@ -1,0 +1,61 @@
+HADOOP ADMIN NOTES
+
+Hadoop use parallel processing algorithms and simple data processing models that underlie a highly efficient and reliable computing
+architecture
+
+Hadoop can be run both on premises and cloud, such as the Amazon Web Service’s (AWS) Hadoop-based big data offering named Amazon EMR (Elastic MapReduce).
+
+Unique Features of Hadoop
+1-Capability to handle large data sets:
+2-Fault tolerance:Everything in Hadoop is based on the assumption that hardware fails. Hadoop depends on large numbers of servers so it can parallelize work across them. Server and storage failures are to be
+expected, and the system isn’t affected by non-functioning storage units or even failed server
+3-Streaming access to data: Traditional databases are geared mostly for fast access to data and not for batch processing. Hadoop was originally
+designed for batch processing such as the indexing of millions of web pages and provides streaming access to data sets
+
+
+Hadoop’s capability to process data so efficiently is the feature known as data locality, meaning Hadoop brings processing to where the data is
+stored, rather than doing things the old fashioned way, which involves moving data through the network. That tends to be far slower, due to the
+network/bandwidth bottleneck. Hadoop stores its data in a distributed file system called HDFS, and it moves computation such as MapReduce processing to the
+cluster’s nodes using YARN, which is Hadoop’s resource management system.
+
+traditional systems use a scale up architecture while Hadoop’s HDFS file system lets you adopt a scale out architecture
+Hive, which helps users impose a relational database–like abstraction over HDFS data,
+
+One of the biggest issues with traditional databases and data warehouses is
+scalability. Once your data reaches a few terabytes, queries take an extremely long
+time to finish. Scalability (and reliability) is Hadoop’s calling card—the size of
+your data set is really irrelevant if you’ve the processing capacity. If you triple the
+number of nodes in a cluster, you can get the job done in a third of the time
+
+data lake is alluding to a central location to store all of an organization’s data, irrespective of the source of the data as well as the analytical frameworks that utilize this data. The data lake serves as a data
+ingestion and analytical grid for the organization
+
+You can use the data lake as a landing place for all data arriving into a
+company’s systems as well as to store data you wish to offload from data
+warehouses and other data stores. The key idea is that you maintain one big
+central repository for all your data—structured, semi-structured and unstructured
+
+A Hadoop 2cluster can support over 10,000 servers
+edge servers (so called because they really don’t run any
+Hadoop processes but can access the cluster), which are used for accessing
+the Hadoop cluster to launch applications
+
+technically speaking, Hadoop consists of just HDFS and YARN, it’s
+very common to use a number of other frameworks and software such as Hive,
+Pig, Oozie, Spark and Flume in production Hadoop clusters
+
+How to schedule jobs in hadoop ??
+
+components that are most important for administrators, such as Apache Oozie,
+which you must master in order to efficiently schedule Hadoop-related jobs.
+Similarly, learning how to use Apache Sqoop lets you move data into and out of
+your cluster.
+
+a task that fails due to the
+storage issues will automatically be restarted by Hadoop on a different node
+
+Tools such as
+Nagios and Ganglia help you manage and monitor the entire cluster, including the
+operating system, storage and network.
+
+

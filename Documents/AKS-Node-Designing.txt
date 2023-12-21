@@ -1,0 +1,113 @@
+Min: 3 Worker Node, 2 Master Node
+	
+	How Many Worker Node
+		Depends Upon; Configuration of Worker Node and Overall computation power required.
+				Find Overall computtional Power.
+				
+				
+
+Example 1: Client: 1 Application: Min pods=4, Max Pods=12, Database as well.
+
+			1 Pods: 1 Core CPU, 4GB RAM   ---- as per market standards
+				Overall Computational Power: 
+								Min: 1 Core* 4 Pods= 4 Core
+									 4 GB8* 4 Pods= 16 GB
+									Buffer (10-15%): 4.6 Core, 18.4 GB Memory
+																		 
+									 
+								Max: 1 Core* 12 Pods= 12 Core
+									 4 GB* 12 Pods= 48 GB
+									 Buffer (10-15%): 13.8 Core, 55.2 GB
+
+
+				Min: 4.6 Core, 18.4 GB Memory; 5 Core, 20 GB		Server( 1 Core, 4 GB): Min, 5 Worker Node
+				Max: 13.8 Core, 55.2 GB; 14 Core, 56 GB				Server( 1 Core, 4 GB): Max, 14 Worker Node			5-14 Node AKS cluster
+				
+																	Server (4 Core, 16 GB): Min, 1 Worker Node
+																	Server( 4 Core, 16 GB): Max, 4 Worker Node			1-4 Node AKS Cluster
+		
+
+Note: In case of DB, select VM with high IOPS
+
+
+Note: High Availibility---> Availibility Zones, Min 3 Zones, Depends upon region, Region
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Example 2: 1 Application Min Pods=4, Scale upto 8 pods.
+MIN: 1 cpu 4 gb ram  monolithic
+4*1 core 4*4gb ram= 4core 16 gb ram add 20 % buffer 3.2 16+3.2= 20 gb memory
+
+max:1 cpu 4 gb ram
+1*8 core 8*4gb =8 cpu 32 gb memory
+
+20% buffer: 6.4=32+6.4= MA   40 GB memory 
+
+
+
+Exapmple 3: 2 Applications
+			Application 1: Min Pod =2, Max Pods=6
+			Application 2: Min pods =3, Max Pod=5
+
+
+Example 4: 1 Appliation 4-16 pods, memory=512 GB	
+
+
+
+
+
+
+
+
+AKS-Deployment
+
+Java,python,.net
+
+namespace deployment
+
+azure 
+Error:
+Image error
+crash loop back
+version wrong
+tag wrong
+access keys expire 
+
+---------------------------------
+
+In XYZ project, I have worked as DevOps engineer primarily focussed on Azure DevOps and Kubernetes, where I was responsible for performing multi stage deployment of different application such as Java, Python, .Net.
+In this role, I have deployed application using both the method, viz Using Azure DevOps Pipeline and traditional Kubernetes CLI. Also, I was responsible to ensure that the application is running smooth, and if we encounter any error such as "Crashloopbackoff Error" or others, we have to resolve the errors.
+
+About the multi stage deployment I told earlier, so we were creating namespaces such as UAT, Dev, PreProd, Prod in the same kubernetes and were deploying there.
+
+What are the different errors you faced.
+	We primarily faced "Crashloop Backoff" error, which occurs for multiple reason such as wrong image URL, Wrong tag in deployment file, or expiration of access key of ACR etc.
+	
+How you resolved the errors ?
+	If we are getting error in pipeline, then we have to go to Kubernetes server and perform manual deployment using the same deployment file, post which we have to analyze logs of pods, deployment, services to check where exactly where is the issue, post which based on logs we have to find and apply the solution.
+	
+	kubectl apply -f deployment.yml
+	
+	kubectl get all
+	
+	kubectl describe pod PodName
+	
+	kubectl descibe deployment DeployMentName
+	
+	kubectl describe service ServiceName
+	
+What are the steps of CI/CD pipeline ?
+Build Pipeline
+	Build
+	SCA (Static Code Analysis)--- SonarQube
+		Prepare code analysis
+		Run code analysis
+		push code analysis result
+	Docker build and push
+	Copy and publish to artifacts
+	
+Release
+	

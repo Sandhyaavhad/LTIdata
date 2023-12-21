@@ -1,0 +1,35 @@
+name:
+trigger: 
+  - main
+  - develop
+  - .
+  -
+variables:
+resources:
+parameters:
+stage: name of the stage     # agent is at stage level
+pool:
+- jobs:
+   - job: buidling of code
+     pool: 
+ nuget restore
+ nuget install
+ restore
+ install
+prepare the sonarcloud analysis # checking connectivity b/w agent and sonar cloud and sonarqube
+
+ build ##ms build tool for .net core csproj file
+ 
+run analysis # snoar scanner will run
+publish quality 
+quality breaker # checks for the quality gate result
+
+
+
+what are deployment slots in azure web app
+how u can add deployment slot in azure web app
+how u can switch traffic b/w two deplyment slot
+what is zero downtime deployment stratagy
+
+iis web app deploy
+what are the 2 tasks use to deploy .net core app on windows iis?

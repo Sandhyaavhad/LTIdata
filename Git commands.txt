@@ -1,0 +1,407 @@
+git@github.com:Sandhyaavhad/Sprinbootapp.git
+
+git remote add origin https://github.com/Sandhyaavhad/Sprinbootapp.git
+
+git push origin master –force
+git branch -M main
+
+
+git remote add Sprinbootapp https://github.com/Sandhyaavhad/Sprinbootapp.git
+
+PS C:\Users\10720534\OneDrive - LTI\Documents\Jenkinsaks\newjenkinsrepo\san\Sprinbootapp> bash
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git init
+Initialized empty Git repository in C:/Users/10720534/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp/.git/
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (master)
+$ git add .
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (master)
+$ git commit -m 'files added'
+[master (root-commit) 7c037cd] files added
+ Committer: sandhyaavhad <Sandhya.Avhad@lntinfotech.com>
+Your name and email address were configured automatically based    
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 29 files changed, 819 insertions(+)
+ create mode 100644 springboot-app/Dockerfile
+ create mode 100644 springboot-app/Jenkinsfile
+ create mode 100644 springboot-app/Jenkinsfile-K8S
+ create mode 100644 springboot-app/Jenkinsfile-K8S-jan23
+ create mode 100644 springboot-app/aks-deploy-from-acr.yaml
+ create mode 100644 springboot-app/azure-pipelines-old.yml
+ create mode 100644 springboot-app/azure-pipelines.yml
+ create mode 100644 springboot-app/eks-deploy-from-ecr.yaml
+ create mode 100644 springboot-app/eks-deploy-k8s.yaml
+ create mode 100644 springboot-app/jenkins-aks-deploy-from-acr.yaml
+ create mode 100644 springboot-app/manifests/deployment.yml
+ create mode 100644 springboot-app/manifests/service.yml
+ create mode 100644 springboot-app/pom.xml
+ create mode 100644 springboot-app/springboot-docker-hub.yaml
+ create mode 100644 springboot-app/springboot-lb.yaml
+ create mode 100644 springboot-app/src/main/java/com/tcs/angularjs/MyAwesomeSpringBootAngularJsApp.java
+ create mode 100644 springboot-app/src/main/java/com/tcs/angularjs/controller/RestWebController.java
+ create mode 100644 springboot-app/src/main/java/com/tcs/angularjs/controller/WebController.java
+ create mode 100644 springboot-app/src/main/java/com/tcs/angularjs/model/Customer.java
+ create mode 100644 springboot-app/src/main/resources/application.properties
+ create mode 100644 springboot-app/src/main/resources/static/js/controller.js
+ create mode 100644 springboot-app/src/main/resources/templates/index.html
+ create mode 100644 springboot-app/target/classes/application.properties
+ create mode 100644 springboot-app/target/classes/com/tcs/angularjs/MyAwesomeSpringBootAngularJsApp.class
+ create mode 100644 springboot-app/target/classes/com/tcs/angularjs/controller/RestWebController.class
+ create mode 100644 springboot-app/target/classes/com/tcs/angularjs/controller/WebController.class
+ create mode 100644 springboot-app/target/classes/com/tcs/angularjs/model/Customer.class
+ create mode 100644 springboot-app/target/classes/static/js/controller.js
+ create mode 100644 springboot-app/target/classes/templates/index.html
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (master)
+$ git branch -M main
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git init
+Reinitialized existing Git repository in C:/Users/10720534/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp/.git/
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git add .
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git commit -m 'files added'
+On branch main
+nothing to commit, working tree clean
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git push
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git remote add Sprinbootapp https://github.com/Sandhyaavhad/Sprinbootapp.git
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git push
+fatal: The current branch main has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream Sprinbootapp main
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$  git push --set-upstream Sprinbootapp main~
+fatal: invalid refspec 'main~'
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$  git push --set-upstream Sprinbootapp main
+To https://github.com/Sandhyaavhad/Sprinbootapp.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/Sandhyaavhad/Sprinbootapp.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$  git push --set-upstream Sprinbootapp test
+error: src refspec test does not match any
+error: failed to push some refs to 'https://github.com/Sandhyaavhad/Sprinbootapp.git'
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$  git push --set-upstream Sprinbootapp main
+To https://github.com/Sandhyaavhad/Sprinbootapp.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/Sandhyaavhad/Sprinbootapp.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git fetch https://github.com/Sandhyaavhad/Sprinbootapp.git
+remote: Enumerating objects: 50, done.
+remote: Counting objects: 100% (50/50), done.
+remote: Compressing objects: 100% (26/26), done.
+remote: Total 50 (delta 10), reused 50 (delta 10), pack-reused 0
+Unpacking objects: 100% (50/50), 9.96 KiB | 94.00 KiB/s, done.
+From https://github.com/Sandhyaavhad/Sprinbootapp
+ * branch            HEAD       -> FETCH_HEAD
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$  git push --set-upstream Sprinbootapp main
+To https://github.com/Sandhyaavhad/Sprinbootapp.git
+ ! [rejected]        main -> main (non-fast-forward)
+error: failed to push some refs to 'https://github.com/Sandhyaavhad/Sprinbootapp.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$  git push --set-upstream Sprinbootapp test
+error: src refspec test does not match any
+error: failed to push some refs to 'https://github.com/Sandhyaavhad/Sprinbootapp.git'
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git pull https://github.com/Sandhyaavhad/Sprinbootapp.git
+From https://github.com/Sandhyaavhad/Sprinbootapp
+ * branch            HEAD       -> FETCH_HEAD
+fatal: refusing to merge unrelated histories
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$  git push --set-upstream Sprinbootapp main
+To https://github.com/Sandhyaavhad/Sprinbootapp.git
+ ! [rejected]        main -> main (non-fast-forward)
+error: failed to push some refs to 'https://github.com/Sandhyaavhad/Sprinbootapp.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git pull
+From https://github.com/Sandhyaavhad/Sprinbootapp
+ * [new branch]      main       -> Sprinbootapp/main
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=Sprinbootapp/<branch> main
+
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git pull https://github.com/Sandhyaavhad/Sprinbootapp.git main
+From https://github.com/Sandhyaavhad/Sprinbootapp
+ * branch            main       -> FETCH_HEAD
+fatal: refusing to merge unrelated histories
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git branch --set-upstream-to=Sprinbootapp/main main
+branch 'main' set up to track 'Sprinbootapp/main'.
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git pull https://github.com/Sandhyaavhad/Sprinbootapp.git main
+From https://github.com/Sandhyaavhad/Sprinbootapp
+ * branch            main       -> FETCH_HEAD
+fatal: refusing to merge unrelated histories
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$  git push --set-upstream Sprinbootapp main
+To https://github.com/Sandhyaavhad/Sprinbootapp.git
+ ! [rejected]        main -> main (non-fast-forward)
+error: failed to push some refs to 'https://github.com/Sandhyaavhad/Sprinbootapp.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git pull https://github.com/Sandhyaavhad/Sprinbootapp.git main
+From https://github.com/Sandhyaavhad/Sprinbootapp
+ * branch            main       -> FETCH_HEAD
+fatal: refusing to merge unrelated histories
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$ git pull https://github.com/Sandhyaavhad/Sprinbootapp.git main --allow-unrelated-histories
+From https://github.com/Sandhyaavhad/Sprinbootapp
+ * branch            main       -> FETCH_HEAD
+Merge made by the 'ort' strategy.
+ Dockerfile                                         |   4 ++
+ Jenkinsfile                                        |  44 +++++++++++++++
+ Jenkinsfile-K8S                                    |  41 ++++++++++++++
+ Jenkinsfile-K8S-jan23                              |  46 ++++++++++++++++
+ aks-deploy-from-acr.yaml                           |  38 +++++++++++++
+ azure-pipelines-old.yml                            |  59 +++++++++++++++++++++
+ azure-pipelines.yml                                |  50 +++++++++++++++++
+ eks-deploy-from-ecr.yaml                           |  38 +++++++++++++
+ eks-deploy-k8s.yaml                                |  42 +++++++++++++++
+ jenkins-aks-deploy-from-acr.yaml                   |  38 +++++++++++++
+ manifests/deployment.yml                           |  19 +++++++
+ manifests/service.yml                              |  10 ++++
+ pom.xml                                            |  54 +++++++++++++++++++
+ springboot-docker-hub.yaml                         |  34 ++++++++++++
+ springboot-lb.yaml                                 |  34 ++++++++++++
+ .../angularjs/MyAwesomeSpringBootAngularJsApp.java |  12 +++++
+ .../angularjs/controller/RestWebController.java    |  29 ++++++++++
+ .../tcs/angularjs/controller/WebController.java    |  13 +++++
+ .../java/com/tcs/angularjs/model/Customer.java     |  28 ++++++++++
+ src/main/resources/application.properties          |   1 +
+ src/main/resources/static/js/controller.js         |  37 +++++++++++++
+ src/main/resources/templates/index.html            |  55 +++++++++++++++++++
+ target/classes/application.properties              |   1 +
+ .../MyAwesomeSpringBootAngularJsApp.class          | Bin 0 -> 754 bytes
+ .../angularjs/controller/RestWebController.class   | Bin 0 -> 1389 bytes
+ .../tcs/angularjs/controller/WebController.class   | Bin 0 -> 686 bytes
+ .../classes/com/tcs/angularjs/model/Customer.class | Bin 0 -> 901 bytes
+ target/classes/static/js/controller.js             |  37 +++++++++++++
+ target/classes/templates/index.html                |  55 +++++++++++++++++++
+ 29 files changed, 819 insertions(+)
+ create mode 100644 Dockerfile
+ create mode 100644 Jenkinsfile
+ create mode 100644 Jenkinsfile-K8S
+ create mode 100644 Jenkinsfile-K8S-jan23
+ create mode 100644 aks-deploy-from-acr.yaml
+ create mode 100644 azure-pipelines-old.yml
+ create mode 100644 azure-pipelines.yml
+ create mode 100644 eks-deploy-from-ecr.yaml
+ create mode 100644 eks-deploy-k8s.yaml
+ create mode 100644 jenkins-aks-deploy-from-acr.yaml
+ create mode 100644 manifests/deployment.yml
+ create mode 100644 manifests/service.yml
+ create mode 100644 pom.xml
+ create mode 100644 springboot-docker-hub.yaml
+ create mode 100644 springboot-lb.yaml
+ create mode 100644 src/main/java/com/tcs/angularjs/MyAwesomeSpringBootAngularJsApp.java
+ create mode 100644 src/main/java/com/tcs/angularjs/controller/RestWebController.java
+ create mode 100644 src/main/java/com/tcs/angularjs/controller/WebController.java
+ create mode 100644 src/main/java/com/tcs/angularjs/model/Customer.java
+ create mode 100644 src/main/resources/application.properties
+ create mode 100644 src/main/resources/static/js/controller.js
+ create mode 100644 src/main/resources/templates/index.html
+ create mode 100644 target/classes/application.properties
+ create mode 100644 target/classes/com/tcs/angularjs/MyAwesomeSpringBootAngularJsApp.class
+ create mode 100644 target/classes/com/tcs/angularjs/controller/RestWebController.class
+ create mode 100644 target/classes/com/tcs/angularjs/controller/WebController.class
+ create mode 100644 target/classes/com/tcs/angularjs/model/Customer.class
+ create mode 100644 target/classes/static/js/controller.js
+ create mode 100644 target/classes/templates/index.html
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+$  git push --set-upstream Sprinbootapp main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 523 bytes | 261.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/Sandhyaavhad/Sprinbootapp.git
+   5ded2af..3529394  main -> main
+branch 'main' set up to track 'Sprinbootapp/main'.
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/Sprinbootapp (main)
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+      Dockerfile
+        Jenkinsfile
+        Jenkinsfile-K8S
+        Jenkinsfile-K8S-jan23
+        aks-deploy-from-acr.yaml
+        azure-pipelines-old.yml
+        azure-pipelines.yml
+        eks-deploy-from-ecr.yaml
+        eks-deploy-k8s.yaml
+        jenkins-aks-deploy-from-acr.yaml
+        manifests/
+        pom.xml
+        springboot-docker-hub.yaml
+        springboot-lb.yaml
+        src/
+        target/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (master)
+$ git branch -M main
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$ git remote add origin https://github.com/Sandhyaavhad/Sprinbootapp.git
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$ git push -u origin main
+error: src refspec main does not match any
+error: failed to push some refs to 'https://github.com/Sandhyaavhad/Sprinbootapp.git'
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$ git push -u origin master
+error: src refspec master does not match any
+error: failed to push some refs to 'https://github.com/Sandhyaavhad/Sprinbootapp.git'
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$
+
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$ git push origin main
+error: src refspec main does not match any
+error: failed to push some refs to 'https://github.com/Sandhyaavhad/Sprinbootapp.git'
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$
+
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$
+
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$ git remote add origin https://github.com/Sandhyaavhad/Sprinbootapp.git
+error: remote origin already exists.
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$ git branch -M main
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$ git push -u origin main
+error: src refspec main does not match any
+error: failed to push some refs to 'https://github.com/Sandhyaavhad/Sprinbootapp.git'
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$ cd ..
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san (master)
+$ cd springboot-app/
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$ git clone https://github.com/Sandhyaavhad/Sprinbootapp.git
+Cloning into 'Sprinbootapp'...
+remote: Enumerating objects: 50, done.
+remote: Counting objects: 100% (50/50), done.
+remote: Compressing objects: 100% (26/26), done.
+remote: Total 50 (delta 10), reused 50 (delta 10), pack-reused 0
+Receiving objects: 100% (50/50), 9.98 KiB | 3.33 MiB/s, done.
+Resolving deltas: 100% (10/10), done.
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san/springboot-app (main)
+$ cd ../
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san (master)
+$ git branch -M main
+
+10720534@LTILBOM20402582 MINGW64 ~/OneDrive - LTI/Documents/Jenkinsaks/newjenkinsrepo/san (main)
+$ git clone https://github.com/Sandhyaavhad/Sprinbootapp.git

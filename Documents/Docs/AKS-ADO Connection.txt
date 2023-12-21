@@ -1,0 +1,30 @@
+kubectl create clusterrolebinding devsa --clusterrole=cluster-admin --serviceaccount=dev:devsa
+
+
+kubectl config set-context --current-namespace=dev
+
+----------------
+
+Create namespace
+
+Switch to Specific namespace
+
+Create Service account
+
+Create Role/ Apply rolebinding
+kubectl create clusterrolebinding devsa --clusterrole=cluster-admin --serviceaccount=dev:devsa
+
+
+
+Create Secret
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: devsa-secret
+  annotations:
+    kubernetes.io/service-account.name: devsa
+type: kubernetes.io/service-account-token
+EOF
+
+kubectl get secret devsa-secret -n dev -o json

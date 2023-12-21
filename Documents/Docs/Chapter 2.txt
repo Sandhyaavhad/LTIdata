@@ -1,0 +1,89 @@
+ 												Architecture of hadoop
+ 
+The two foundational layers of Hadoop are its storage system, HDFS, and the processing framework, YARN.
+
+Bringing code to the data and not the other way around, Hadoop efficiently processes large amounts of data.
+
+Clients contact the master nodes in order to perform computations. When a client seeks to read or write to HDFS, it contacts the NameNode service, which provides the client information about the location of the files in HDFS.
+
+The worker nodes are where the data is stored and computations are performed.
+
+ResourceManager: This is a single service for the entire cluster that runs on one of the master nodes and is responsible for allocating the cluster’s resources and the scheduling of jobs on the worker nodes.
+
+ApplicationMaster: This is a master service, and there’s one for each application you run in the cluster. The ApplicationMaster coordinates the execution of the application in the cluster and negotiates with the ResourceManager for resources for the application.
+
+NodeManager: There is one of these services running on each of the worker nodes. The NodeManager service runs and manages tasks (components of the application or job) on the worker nodes. They remain in touch with the ResourceManager and update it with their health, as well as the status of the tasks they’re running.
+
+A distributed storage system stores large amounts of data over a network of computers with built-in redundancy to protect data
+
+The HDFS data is distributed among the cluster’s nodes but appears to you as a single unified file system that you can access from any of the cluster’s nodes
+
+Hadoop data files employ a write-once-read-many access model so once you write a file to HDFS, you can’t modify its contents. You also can’t overwrite a file with an existing name. You can only move delete and rename a file in hdfs.
+
+HDFS enables users to store data in files, which are split into multiple blocks of size 64 or 128 mb, i.e hdfs split big files in blocks and store those blocks in different datanodes.
+
+NameNode Functions
+The NameNode manages the file system namespace by performing the following
+tasks:
+	Maintaining the metadata pertaining to the file system, such as the file hierarchy and the block locations for each file
+	Managing user access to the data files
+	Mapping the data blocks to the DataNodes in the cluster
+	Performing file system operations such as opening and closing the files and directories
+	Providing registration services for DataNode cluster membership and handling periodic heartbeats from the DataNodes
+	Determining on which nodes data should be replicated, and deleting over replicated blocks
+	Processing the block reports sent by the DataNodes and maintaining the location where data blocks live
+
+It doesn’t store the block locations—it simply reconstructs them from information sent by the DataNodes when you start up the cluster. Following this, it retains the information in memory for fast access to it but also persists the same informationto disk.
+Anytime there’s a change in the metadata due to operations such as a file creation or deletion, it doesn’t prompt the immediate revision of the fsimage file. Instead, the change information is recorded in the HDFS metadata in RAM as well as edits file on disk. By default, every hour, the Secondary NameNode merges the edits and fsimage files and writes the consolidated information as a fresh fsimage file. The NameNode truncates the old edits file at this point and starts writing new stuff to it.
+
+
+Datanode keep sending periodic block reports and heartbeats to namenode. A heartbeat confirms the DataNode is alive and healthy, and a block report shows the blocks being managed by the DataNode.
+
+The key thing to understand is that at no point does actual HDFS data travel through the NameNode. Clients always access the file system (HDFS) that resides on the DataNodes. The NameNode facilitates and enables that data access. i.e Namenode will give location to write data or read. Client will go there and perform those operation with the help of daatanode.
+
+Large block sizes provide the following benefits:
+	The file system metadata is smaller when you use very large block sizes as opposed to small block sizes.
+	Since large chunks of data can be read sequentially, fast streaming reads of data are easier to perform.
+
+Hadoop environments prefer to use binary formats rather than text formats when dealing with HDFS, because binary formats prevent incomplete records being written to files, by catching and ignoring incorrect records that may be created due to data corruption or incompleteness.
+
+Users can also customize the data format by using serializers, which let them write data in any format they choose
+
+Writing to an HDFS File:
+When client applications need to write data to HDFS, they perform an initial write to a local file on the client machine, in a temporary file. When the client finishes the write and closes it, or when the temporary file’s size crosses a block boundary, Hadoop will create a file and assign data blocks to the file. The temporary file’s contents are then written to the new HDFS file, block by block. After the first block is written, two other replicas (based on the default replication factor of three) are written to two other DataNodes in the cluster, one after the other. The write operation will succeed only if Hadoop successfully places all data block replicas in all the target nodes.
+
+Hadoop optimizes data reads by choosing to read the replica that’s stored on the same node where the read request originates or at least on the same rack.
+
+The Secondary NameNode is also called the checkpoint node because it performs checkpoint services for the NameNode. In HA hadoop cluster Standby namenode will perform checkpoint.
+
+M-R is a part of YARN but YARN also support other processing framework as well.
+
+
+Each of the applications(jobs) that run on YARN has an ApplicationMaster (AM) associated with it. The ApplicationMaster’s main purpose is to negotiate with the ResourceManager for resources and work with the NodeManagers to execute the tasks that are part of each application.
+
+Each mapper and reducer task runs within its own container. The administrator configures the size of the containers. The job determines the number of mappers and reducers
+
+YARN clients create the apps and launch them. The RM is in charge of scheduling and managing resources. A NodeManager daemon runs on each DataNode and launches and manages containers. There’s a single AM for each job. The AM is created by the RM and it makes all the requests for the containers needed to complete a job. Containers are abstractions that refer to resources such as RAM and CPU.
+
+How YARN Allocates Resources
+Containers are logical constructs that represent a specific amount of memory and other resources, such as the processing cores (CPU), to process its applications
+
+A container can represent 2GB memory and 2 processing cores. All of your YARN application tasks run in containers. Each Hadoop job contains multiple tasks and each of the tasks runs in its own container. A container comes into being when the task starts. When the task completes, the container is killed and its resources allocated to other tasks.
+
+You can configure the containers to suit your resource availability and processing needs. As with everything, Hadoop has default values for configuring the containers (such as 8GB RAM per container), and you can configure them to suit your resource availability and processing needs.
+
+NodeManager manages the containers’ lifecycles and the ResourceManager schedules the containers.
+
+There’s one ResourceManager per cluster, and it does the following:
+	Initiates the startup of all YARN applications
+	Manages job scheduling and execution
+	Allocates resources globally on all the DataNodes
+
+The ResourceManager consists of two key components, the Scheduler and the ApplicationsManager. The Scheduler allocates resources to running applications within the limits of capacities and queues. In order to allocate resources, the Scheduler uses resource containers. The ApplicationsManager accepts job requests submitted by clients and starts the first container for execution of a new ApplicationMaster. It also restarts an ApplicationMaster container upon its failure.
+
+ApplicationMaster is specific to an application and serves the resource requirements of that application. While the ResourceManager and the NodeManager are always running, the ApplicationMaster is only associated with running applications—if there are no currently running applications, there won’t be an ApplicationMaster process running. It’s important to remember that the ApplicationMaster tracks job progress for a specific application
+
+The ApplicationMaster is framework specific.
+There’s a single JobHistoryServer for the entire cluster. The JobHistoryServer archives all YARN job metrics and their metadata and is exposed through the JobHistoryServer web UI. The cluster will run fine without the JobHistoryServer, but you won’t be able to easily access the job logs and job history without it.
+
+

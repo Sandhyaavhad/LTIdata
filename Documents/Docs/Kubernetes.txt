@@ -1,0 +1,133 @@
+In YAML, we can put multiple file in one file by using "---" three dash known as document seperator.
+
+Kubernetes, by defination is an opersource container management and orchestration tool which provide so many facility such as manages, automates container deployment, load balancing, auto-scaling etc. You can use docker image to deploy on k8s.
+
+You can use both docker as well as Kubernates to deploy application using images. But K8s provide you some special capabilities that you won't find in docker; such as multiple instances of containers, monitoring, auto-scaling, load balancing, fault tolerance etc. Also K8S works on master slave architecture while docker works on client-server architecture.
+
+When you deploy any solution on kubernates, you deploy solution to cluster of nodes such as EC2, AzureVM, etc. Kubernates also manages these Virtual servers such as EC2 or VM's called as nodes. To manage these nodes, kubernates cluster have minimum 1 master nodes which act as manager.
+
+Kubernetes works on Master Slave architecture, Slave nodes are the VM where deployments happens, where pods and containers are getting hosted, and Master node manages the slave nodes as well as those deployments and pods.
+	Kubernates Cluster: Worker Nodes(Where we deploy applications) + Master Nodes(Which manages the worker nodes)
+	
+	There are two things; managing containers and managing worker nodes of k8s. Suppose you deploy you application on Node_32 and entire node goes down because of some error; then your application will be unavailable. This shouldn't be the case in real environmet. To overcome these types of issue Master manages worker nodes.
+
+Components of Master Node: A-C-D-S 
+	API Server: kubectl or Cloud interface talk to kubernates using API server
+	Distributed Database: Store desired state of any deployment
+	Scheduler
+	Controller manager
+
+Components of Worker Nodes: C-N-N-P
+	Node Agent (kubelet): Monitor nod and communicate with controller manager of Master Node
+	Networking Components
+	Container Runtime
+	Pods
+
+Using kuberantes, you can also easily upgrade application to different release(using different image) without any downtime. When you will edit and change image for a deployment (generally used to deploy newer version of application), slowly load from older version of application will start shifting to newer deployment. --->Rolling Out Updates.
+
+
+Service in Kubernates
+	A Kubernetes service is a logical abstraction for a deployed group of pods in a cluster (which all perform the same function). Since pods are short living entities, they goes down, restarts etc. A service enables a group of pods, which provide specific functions (web services, image processing, etc.) to be assigned a name and unique IP address (clusterIP). Aftre restart or any changes, The IP of these pods changes very quickly.
+
+A service act as stable front end(endpoint) for a deployment, irrespective of what happening in backend at pod level.
+
+	When we expose deployment, a group of pods will host our application, these pods can go down, can be up, autoscale etc etc. A service is created for that application (Group of pods), this service will be used by end users to access application. Service is responsible to provide static front end user interface to user even if pods are getting created, destroyed changed contineously in backend.
+		I.e after every pod creating or deletion, newer pods gets new IP addresses. So its not possible to give bunch of IP address to end user, here services comes in handy where they provide a static interface to end users irrespective of changes in backend.
+		
+		Three type of services in K8s: Loadbalancer, ClusterIP, NodePort
+	
+	If want communication within cluster: Internal service (type: clusterIP) default, will give only internal(private) IP to service
+	If want communication outside of cluster: External application (type: loadbalancer), will give internal as well as external (Private and Public) IP to service.
+	
+	User ----> Service (Load Balancer) ---> Pods(Deployment)
+
+
+Replica set:
+	To maintain the minimum nubers of replicas of pod mentioned for a deployment. Replicaset enures that a specified numbers of replicas are running all the time !!
+	You can mention numbers of replica required in deployment yaml file.
+	
+Deployment:
+	The application we want to deploy and made available to users. After deploying an application (kubectl create deployment), you need to expose the deployment to outer world as well.
+	After deployment of an application, it is not exposed to user/other application, to make it available we need to create a service for that specific deployment or pods.
+	
+
+Container: Small packages in which we are deploying our application.
+
+Pods: A pod is a collection of containers that can run on a host having independent resources. Smallest deployable units in kubernates. Our container lives inside pods. Pods are the basic unit of Deployment.
+	A kubernates node can have multiple pods and each pods can have multiple container. Multi-container pods are used when an application is dependent upon other application for their functioning.
+	Each pods have unique ip address.
+	There can be multiple container inside a pod. All container in same pod share same resources and can easily communicates with each others.
+	User application will always be inside pods on worker nodes. No matter whatever the situation is, kuberantes will always maintain the minimum number of replica of pods mentioned for an application.
+	Ques: What will happen if you kill any pod ?
+	Replicaset contineously monitors number of replica running for a pod, as soon we kill a pod, replicaset will verify the number of pods need to be up and running and will start new pods.
+	
+
+Deployment-- Jo hm karna cahte hain
+Container-- Jisme hm deployment karna cahte hain.
+Pod-- Jo humare cluster ko resources dega deployment karne ke liye.
+
+
+Namespace is used to seperate resources for different environment such as QA or Dev or Prod.
+i.e  You can deploy your testing application in QA or Developement namespace and after finalizing you can deploy to Production namespace in same node.
+
+
+Secrets in Kubernates
+	We can hold username, password or any confidential data in secrets. Secrets lives in kubernetes and no one will be able to access it in repository.
+	Ques: How to create secrets in K8S ?
+		You can create a secret configuration file in k8s to create secrets. Value of secrets must be base64 encoded.
+		You can create multiple secrets using one secret configuration file.
+		After creation of secret file, you can use below command too store sercet in K8S cluster: kubectl apply -f Secret-File.yaml
+	To check list of secrets: kubectl get secrets
+	How you can reference secrets in deployment files ?
+	To reference a value of secret in environment varibale you have to go this way. First refer your secret Name and from that secret name refer key(Name to pwd, token you have given) you wish to use.
+
+
+
+Scaling a Deployment
+	Manual Scaling: kubectl deployment NameOfDeployment scale --replicas=number
+	Auto Scaling: kubectl deployement NameOfDeployment autoscale --min=num --max=num cpu-percent=threshold
+	You can also configure autoscaling while deploying k8s deployment: --enable-autoscaling --num-nodes NUM_NODES  --min-nodes MIN_NODES --max-nodes MAX_NODES
+
+To properly update your deployment:
+	1- Pause the deployement: kubectl rollout pause deployement/NameOfDeployment
+	2- Update the image/metrics: kubectl set image deploy/nameOfDeployment deploymentName=image
+	3- Resume the deployment: kubectl rollout resume deploy NameOfDeployment
+
+
+The good thing with Cloud based K8S cluster is that, you can do multiple task from cloud interface as well such as deploy a newer version, expose the deployment, scaling or changing replica set etc without even loging to cluster or withou using command.
+I.e for most of the task, you can do using cloud user interface without using kubectl command.
+
+hpa- Horizontalpodautoscaler
+
+-------------------------------------------Commands for Kubernates-------------------------------------------------
+
+To Create Deployment: kubectl create deployment Application.yaml OR kubectl apply -f filename.yml
+To Expose a Deployment: kubctl expose deployment
+To pause a deployment: kubectl rollout pause deployment DeploymentName
+To describe a deployment/Check Logs: kubectl describe deployment DeploymentName
+To scale a Deployment
+	Manual Scaling: kubectl scale deployment NameOfDeployment --replicas=number
+	Auto Scaling: kubectl autoscale deployement NameOfDeployment --min=num --max=num cpu-percent=threshold
+To update a deployement (Change of image, limiting memory): kubectl set image deployment DeploymentName ContainerName=NewImage --record=true 
+	--record=true is used to record the change cause in rollout history.
+	If you made a mistake with newer deployment or because of any reason deployment doesn't get completed, the older version will keep running to minimize downtime.
+	If you successfully deployed newer application, slowly the loads will be migrated from older version to newer version of application and older replica sets will be terminated one by one as pods with newer version are getting created. It is use Rolling update strategy !!
+
+To get health of the components: kubectl get componentstatuses
+To get events of Kubernates cluster: kubectl get events --sort-by=.metadata.creationTimestamp
+To get list of pods: kubectl get pods
+To get details about any specific resource: kubctl describe Resource_Type Resource_Name
+To get list of replicaset: kubectl get replicaset -o wide
+To get details of a resource: kubectl describe ResourceName ResourceID
+To get list of services: kubectl get services
+To get logs of any pod: kubectl describe pod PodName.
+
+
+To delete a pod: kubectl delete pods POD_ID
+	Even after killing a pod, a new pod will start automatically to maintain the replica set.
+
+To assign a service public IP address: minikube service ServiceName
+
+
+To check history of Rollout/Release for a deployment: kubectl rollout history deployment hello-world-rest-api
+To rollout to older deployed version of application: kubectl rollout undo deployment DeploymentName --to-revision=Revision_Number

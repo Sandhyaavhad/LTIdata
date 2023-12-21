@@ -1,0 +1,37 @@
+How do you install docker on Linux machine ?
+	sudo apt-get install docker
+
+Can we use a linux docker image to deploy on windows ?
+	Windows docker image can run only on windows but linux docker image can run on both windows and linux.
+
+How to know container port of a docker image
+	We can use docker inspect for check docker image port.
+
+
+How to copy in container ?
+The docker cp command is used to copy files to/from your docker container to the host file system and vice versa, ADD can do what cp does but in addition it also allows to copy from a URL and extract tar from source directory to destination.
+
+
+Difference between cmd and entrypoint ?
+
+How many master nodes are possible in k8s ?
+A Kubernetes cluster typically has 3 master nodes,
+
+
+Pod to pod communcation: 
+A Pod can communicate with another Pod by directly addressing its IP address, but the recommended way is to use Services.
+Multiple containers in the same Pod share the same IP address. They can communicate with each other by addressing localhost
+
+Containers in the same Pod can connect to each other using localhost, and then the port number exposed by the other container.
+A container in a Pod can connect to another Pod using its IP address. To find out the IP address of a Pod, you can use oc get pods
+A container can connect to another Pod through a Service. 
+
+
+What is docker compose ?
+Docker run is entirely command line based, while docker-compose reads configuration data from a YAML file.
+
+
+How do you identify the image running in a container; by default docker assign name to every container, but we can also use decribe command to get all the properties of container.
+
+How to find on which port docker image is configured to run.
+

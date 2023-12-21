@@ -1,0 +1,63 @@
+1- To check any process running on specific port : netstat -pln | grep 8040
+
+2- To format namenode in hadoop : hadoop namenode -format
+
+3- To show report of total hdfs file system: hadoop dfsadmin -report
+
+4- To Read hosts and exclude files to update datanodes that are allowed to connect to namenode. Mostly used to commission or decommsion nodes : hadoop dfsadmin -refreshNodes
+
+5- To  return the status of safemode: hadoop dfadmin -safemode get: Will return the status of safemode.
+
+6- To put hadoop cluster in safemode: hadoop dfadmin -safemode enter
+
+7- To comeout from safemode : hadoop dfsadmin -safemode leave
+
+8- To manually Set the replication factor 5 to a specific file : hadoop fs -setrep -w 5  FILE
+
+9- To transfer files from 1 hadoop cluster to another: hadoop distcp hdfs://<ip1>/input hdfs://<ip2>/output
+
+10-To check hadoop job status : hadoop job -status <job -id >
+
+11-To list the namenodes : hdfs getconf -namenodes
+
+12-To check status of datanodes from Backend : hdfs dfsadmin -report
+
+13-To check Space of hdfs filesystem(Whole cluster) :  hdfs dfs -df -h
+
+14-To get the MachineID of namenodes: hdfs getconf -namenodes
+
+15-Command to get namenodes along with port number: hdfs getconf -nnRpcAddresses
+
+16-To check status of active/standby namenode: hdfs haadmin -getServiceState NAMENODE
+	NAMENODE can be nn1 or nn2 (For development) WP43HDP12, WP43HDP13(For production)
+	E.X:hdfs haadmin -getServiceState nn1
+		hdfs haadmin -getServiceState nn2
+
+17-To check status of active/standby resource manager: yarn rmadmin -getServiceState RESOURCE_MANAGER
+	RESOURCE_MANAGER can be rm1 or rm2
+	E.X:yarn rmadmin -getServiceState nn1
+		yarn rmadmin -getServiceState nn2
+
+18-To Manual switching of Namenode from active to standby: hdfs haadmin -transitionToStandby --forcemanual NAMENODE
+	
+19-To Manual switching of Namenode from standby to active: hdfs haadmin -transitionToActive --forcemanual NAMENODE
+
+20-To Manual switching of R.M from active to standby: yarn rmadmin -transitionToStandby --forcemanual RESOURCE_MANAGER
+
+21-To Manual switching of R.M from standby to active: hdfs haadmin -transitionToActive --forcemanual RESOURCE_MANAGER
+
+22-To create a .tar.gz File : tar -czvf elasticsearch-6.5.4.tar.gz elasticsearch-6.5.4
+--exclude=/hadoop/ecosystem/spark-2.0.0-bin-hadoop2.7/local/* --exclude=/hadoop/ecosystem/spark-2.0.0-bin-hadoop2.7/logs/* --exclude=/hadoop/ecosystem/spark-2.0.0-bin-hadoop2.7/work/*
+
+23-To Check Disk Storages: df -sh for linux file system
+							du -sh directory_name  for directory.
+							
+24-To Backup Metadata (fsimage & edits). Put cluster in safemode before executing this: hadooop dfsadmin -saveNameSpace
+
+25- To Empty trash on HDFS : hadoop fs -expunge
+
+26- To check hadoop version : hadoop version
+
+27-To check the filesystem in hdfs to find missing files, over replicated, under replicated and corrupted blocks: hadoop fsck /
+
+28-To store the output log of a command in any text file: command 1>/tmp/balancer-out.log 2>/tmp/balancer-debug.log

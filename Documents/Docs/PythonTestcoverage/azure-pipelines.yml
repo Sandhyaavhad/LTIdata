@@ -1,0 +1,79 @@
+trigger:
+- main
+
+stages:
+- stage: 'Build_Stage' 
+  jobs:
+  - job: 'Build_Job' #Job name cannot have spaces
+    displayName: 'Application Build' #Name displayed when viewing in Azure DevOps
+    
+    pool:
+      vmImage: ubuntu-latest
+    
+    variables:
+      projectRoot: $(System.DefaultWorkingDirectory)
+      pythonVersion: '3.7'
+
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: $(pythonVersion)
+      displayName: 'Use Python $(pythonVersion)'
+
+    - script: |
+       python -m pip install --upgrade pip
+       pip install -r requirements.txt
+      displayName: 'Install dependencies'
+    
+    - script: |
+        pip install pytest pytest-azurepipelines
+        pip install pytest-cov
+        pytest --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml
+        coverage run -m pytest
+        coverage xml
+      displayName: 'pytest'
+
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'SonarCloud'
+        organization: 'ltipracticelab'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'LTIPracticeLab_PythonTestcoverage'
+        cliProjectName: 'PythonTestcoverage'
+        cliSources: '.'
+        extraProperties: |
+          sonar.python.coverage.reportsPath = "$(System.DefaultWorkingDirectory)/**/coverage.xml"
+
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      inputs:
+        testResultsFiles: '**/test-*.xml'
+        testRunTitle: 'Publish test results'
+    
+    - task: PublishCodeCoverageResults@1
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.SourcesDirectory)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
+        replaceExistingArchive: true
+
+    - task: SonarCloudAnalyze@1
+
+    - task: SonarCloudPublish@1
+      inputs:
+        pollingTimeoutSec: '300'
+    
+    - task: sonarcloud-buildbreaker@2
+      inputs:
+        SonarCloud: 'SonarCloud'
+        organization: 'ltipracticelab'
+
+    - publish: $(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip
+      displayName: 'Upload package'
+      artifact: drop

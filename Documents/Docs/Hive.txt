@@ -1,0 +1,11 @@
+
+Hive is a data warehouse which provides us sql like query (Hive QL) on structured hadoop data.
+Hive is used to data summarization, data query, and data analysis.
+This language translates SQL-like queries into MapReduce jobs for deploying them on Hadoop.
+Hive is best suited for batch jobs, rather than working with web log data and append-only data. It cannot work for online transaction processing (OLTP) systems since it does not provide real-time querying for row-level updates. 
+Hive is generally used for creating reports.
+Data warehouse refers to a system used for reporting and data analysis. What this means is inspecting, cleaning, transforming, and modeling data with the goal of discovering useful information and suggesting conclusions
+Hive as data warehouse designed for managing and querying only structured data that is stored in tables
+
+i.e hive will convert your query in M-R jobs internally, and then these jobs will go to master node for processing.
+For single user metadata storage, Hive uses derby database and for multiple user Metadata or shared Metadata case Hive uses MYSQL.
